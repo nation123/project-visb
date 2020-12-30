@@ -2,6 +2,7 @@
 const path = require('path')
 const defaultSettings = require('./src/settings.js')
 var webpack = require('webpack');
+
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
@@ -24,8 +25,8 @@ module.exports = {
    * In most cases please use '/' !!!
    * Detail: https://cli.vuejs.org/config/#publicpath
    */
-  publicPath:process.env.NODE_ENV === 'development'?'/':'/HXCRM',
-  outputDir: 'dist',
+  publicPath: process.env.NODE_ENV === 'development' ? '/' : '/project',
+  outputDir: 'dist/project',
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
@@ -36,18 +37,18 @@ module.exports = {
   //     warnings: false,
   //     errors: true
   //   },
-    // proxy: {
-    //   // change xxx-api/login => mock/login
-    //   // detail: https://cli.vuejs.org/config/#devserver-proxy
-    //   [process.env.VUE_APP_BASE_API]: {
-    //     target: `http://127.0.0.1:${port}/mock`,
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       ['^' + process.env.VUE_APP_BASE_API]: ''
-    //     }
-    //   }
-    // },
-    // after: require('./mock/mock-server.js')
+  // proxy: {
+  //   // change xxx-api/login => mock/login
+  //   // detail: https://cli.vuejs.org/config/#devserver-proxy
+  //   [process.env.VUE_APP_BASE_API]: {
+  //     target: `http://127.0.0.1:${port}/mock`,
+  //     changeOrigin: true,
+  //     pathRewrite: {
+  //       ['^' + process.env.VUE_APP_BASE_API]: ''
+  //     }
+  //   }
+  // },
+  // after: require('./mock/mock-server.js')
   // },
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
@@ -56,12 +57,12 @@ module.exports = {
     resolve: {
       alias: {
         '@': resolve('src'),
-        '_c':resolve('src/components'),
-        '_a':resolve('src/assets'),
-        '_u':resolve('src/utils'),
-        '_s':resolve('src/store'),
-        '_api':resolve('src/api'),
-        'vendor':resolve('src/vendor')
+        '_c': resolve('src/components'),
+        '_a': resolve('src/assets'),
+        '_u': resolve('src/utils'),
+        '_s': resolve('src/store'),
+        '_api': resolve('src/api'),
+        'vendor': resolve('src/vendor')
       }
     }
   },
@@ -98,7 +99,7 @@ module.exports = {
       .end()
 
     config
-    // https://webpack.js.org/configuration/devtool/#development
+      // https://webpack.js.org/configuration/devtool/#development
       .when(process.env.NODE_ENV === 'development',
         config => config.devtool('cheap-source-map')
       )
@@ -110,7 +111,7 @@ module.exports = {
             .plugin('ScriptExtHtmlWebpackPlugin')
             .after('html')
             .use('script-ext-html-webpack-plugin', [{
-            // `runtime` must same as runtimeChunk name. default is `runtime`
+              // `runtime` must same as runtimeChunk name. default is `runtime`
               inline: /runtime\..*\.js$/
             }])
             .end()
@@ -143,11 +144,11 @@ module.exports = {
       )
   }
 }
-    plugins: [
-　　new webpack.ProvidePlugin({
-　　　　$:"jquery",
-　　　　jQuery:"jquery",
-        jquery:"jqery",
-　　　　"window.jQuery":"jquery"
-　　})
+plugins: [
+  new webpack.ProvidePlugin({
+    $: "jquery",
+    jQuery: "jquery",
+    jquery: "jqery",
+    "window.jQuery": "jquery"
+  })
 ]
